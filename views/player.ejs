@@ -1,0 +1,27 @@
+<% layout('layout', { title: album.title }) %>
+<section class="player card">
+  <h1><%= album.title %></h1>
+  <p class="artist"><%= album.artist %></p>
+  <audio id="audio" controls preload="none"></audio>
+  <p class="fineprint">Streaming is limited to your account and device. Tokens refresh every ~45s.</p>
+</section>
+<script>
+let currentToken = "<%= token %>";
+const slug = "<%= album.slug %>";
+const audio = document.getElementById('audio');
+
+function withTokenUrl() {
+  const u = new URL(`/stream/${encodeURIComponent(slug)}`, window.location.origin);
+  u.searchParams.set('token', currentToken);
+  return u.toString();
+}
+async function refreshToken() {
+  const res = await fetch('/api/stream-token', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ slug })});
+  const data = await res.json();
+  if (data.token) currentToken = data.token;
+}
+
+audio.src = withTokenUrl();
+// refresh token every 45 seconds
+setInterval(refreshToken, 45000);
+</script>

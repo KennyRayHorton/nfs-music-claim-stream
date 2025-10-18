@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title || 'KRH Music' %></title>
+  <link rel="stylesheet" href="/public/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="brand">KRH Music</a>
+    <nav><a href="/demo">Demo</a> <a href="/me">Account</a></nav>
+  </header>
+  <main class="container">
+    <%- body %>
+  </main>
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Kenny Ray Horton</p>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

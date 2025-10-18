@@ -1,0 +1,40 @@
+<% layout('layout', { title: 'Claim your NFC' }) %>
+<section class="card">
+  <h1>Claim your NFC</h1>
+  <p>This NFC code: <code><%= code %></code></p>
+  <p>Album: <strong><%= album_slug %></strong></p>
+  <hr>
+  <h3>Sign in to claim</h3>
+  <form id="start">
+    <input type="email" name="email" placeholder="Your email" required />
+    <button class="button" type="submit">Send login code</button>
+  </form>
+  <form id="verify" style="display:none;margin-top:1rem;">
+    <input type="hidden" name="email">
+    <input type="text" name="code" placeholder="Enter 6‑digit code" required />
+    <button class="button primary" type="submit">Verify</button>
+  </form>
+  <p class="fineprint">In production, a code is emailed to you. In this demo, check the server logs to see the code printed.</p>
+</section>
+<script>
+const f1 = document.getElementById('start');
+const f2 = document.getElementById('verify');
+f1.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const fd = new FormData(f1);
+  const res = await fetch('/auth/start', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(Object.fromEntries(fd))});
+  const data = await res.json();
+  if (data.ok) {
+    f2.style.display = 'block';
+    f2.elements.email.value = fd.get('email');
+  } else alert(data.error || 'Error');
+});
+f2.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const fd = new FormData(f2);
+  const res = await fetch('/auth/verify', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(Object.fromEntries(fd))});
+  const data = await res.json();
+  if (data.ok) location.reload();
+  else alert(data.error || 'Error');
+});
+</script>

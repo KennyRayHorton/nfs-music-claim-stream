@@ -1,0 +1,25 @@
+{
+  "name": "nfc-music-claim-stream",
+  "version": "1.0.0",
+  "description": "Claim-on-first-tap NFC music app with per-user streaming, OTP login, and device binding",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development nodemon server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "better-sqlite3": "^9.6.0",
+    "mime-types": "^2.1.35",
+    "nanoid": "^5.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

@@ -1,0 +1,8 @@
+<% layout('layout', { title: 'Demo' }) %>
+<section class="card">
+  <h1>NFC Claim Demo</h1>
+  <p>Imagine this URL is encoded on your physical NFC tag:</p>
+  <p><code><%= tagUrl %></code></p>
+  <p><a class="button primary" href="<%= tagUrl %>">Tap / Open Claim URL</a></p>
+  <p class="fineprint">First login with a one-time code (check server logs in this demo), then the tag becomes yours.</p>
+</section>

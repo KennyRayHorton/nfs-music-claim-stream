@@ -1,0 +1,11 @@
+<% layout('layout', { title: 'Your Account' }) %>
+<section class="card">
+  <h1>Your Account</h1>
+  <p><strong>Email:</strong> <%= user.email %></p>
+  <h3>Devices (max 2)</h3>
+  <ul>
+    <% devices.forEach(d => { %>
+      <li><code><%= d.device_id %></code> — <%= d.created_at %></li>
+    <% }) %>
+  </ul>
+</section>
